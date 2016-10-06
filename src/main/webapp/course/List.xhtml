@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListCourseTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListCourseEmpty}" rendered="#{courseController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{courseController.items.rowCount > 0}">
+                    <h:outputText value="#{courseController.pagination.pageFirstItem + 1}..#{courseController.pagination.pageLastItem + 1}/#{courseController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{courseController.previous}" value="#{bundle.Previous} #{courseController.pagination.pageSize}" rendered="#{courseController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{courseController.next}" value="#{bundle.Next} #{courseController.pagination.pageSize}" rendered="#{courseController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{courseController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseTitle_idCourse}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCourse}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseTitle_courseName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.courseName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseTitle_courseCode}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.courseCode}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseTitle_level}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.level}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseTitle_language}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.language}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseTitle_startDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.startDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseTitle_endDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.endDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseTitle_maxNumberOfStudents}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.maxNumberOfStudents}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCourseTitle_idTeacher}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTeacher}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{courseController.prepareView}" value="#{bundle.ListCourseViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{courseController.prepareEdit}" value="#{bundle.ListCourseEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{courseController.destroy}" value="#{bundle.ListCourseDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{courseController.prepareCreate}" value="#{bundle.ListCourseCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListCourseIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

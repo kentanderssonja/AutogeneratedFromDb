@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateCourseTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateCourseLabel_idCourse}" for="idCourse" />
+                    <h:inputText id="idCourse" value="#{courseController.selected.idCourse}" title="#{bundle.CreateCourseTitle_idCourse}" required="true" requiredMessage="#{bundle.CreateCourseRequiredMessage_idCourse}"/>
+                    <h:outputLabel value="#{bundle.CreateCourseLabel_courseName}" for="courseName" />
+                    <h:inputText id="courseName" value="#{courseController.selected.courseName}" title="#{bundle.CreateCourseTitle_courseName}" />
+                    <h:outputLabel value="#{bundle.CreateCourseLabel_courseCode}" for="courseCode" />
+                    <h:inputText id="courseCode" value="#{courseController.selected.courseCode}" title="#{bundle.CreateCourseTitle_courseCode}" />
+                    <h:outputLabel value="#{bundle.CreateCourseLabel_level}" for="level" />
+                    <h:inputText id="level" value="#{courseController.selected.level}" title="#{bundle.CreateCourseTitle_level}" />
+                    <h:outputLabel value="#{bundle.CreateCourseLabel_language}" for="language" />
+                    <h:inputText id="language" value="#{courseController.selected.language}" title="#{bundle.CreateCourseTitle_language}" />
+                    <h:outputLabel value="#{bundle.CreateCourseLabel_startDate}" for="startDate" />
+                    <h:inputText id="startDate" value="#{courseController.selected.startDate}" title="#{bundle.CreateCourseTitle_startDate}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateCourseLabel_endDate}" for="endDate" />
+                    <h:inputText id="endDate" value="#{courseController.selected.endDate}" title="#{bundle.CreateCourseTitle_endDate}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateCourseLabel_maxNumberOfStudents}" for="maxNumberOfStudents" />
+                    <h:inputText id="maxNumberOfStudents" value="#{courseController.selected.maxNumberOfStudents}" title="#{bundle.CreateCourseTitle_maxNumberOfStudents}" />
+                    <h:outputLabel value="#{bundle.CreateCourseLabel_idTeacher}" for="idTeacher" />
+                    <h:selectOneMenu id="idTeacher" value="#{courseController.selected.idTeacher}" title="#{bundle.CreateCourseTitle_idTeacher}" >
+                        <f:selectItems value="#{teacherController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{courseController.create}" value="#{bundle.CreateCourseSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{courseController.prepareList}" value="#{bundle.CreateCourseShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateCourseIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

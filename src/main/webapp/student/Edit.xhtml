@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditStudentTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditStudentLabel_idStudent}" for="idStudent" />
+                    <h:inputText id="idStudent" value="#{studentController.selected.idStudent}" title="#{bundle.EditStudentTitle_idStudent}" required="true" requiredMessage="#{bundle.EditStudentRequiredMessage_idStudent}"/>
+                    <h:outputLabel value="#{bundle.EditStudentLabel_firstName}" for="firstName" />
+                    <h:inputText id="firstName" value="#{studentController.selected.firstName}" title="#{bundle.EditStudentTitle_firstName}" />
+                    <h:outputLabel value="#{bundle.EditStudentLabel_lastName}" for="lastName" />
+                    <h:inputText id="lastName" value="#{studentController.selected.lastName}" title="#{bundle.EditStudentTitle_lastName}" />
+                    <h:outputLabel value="#{bundle.EditStudentLabel_address}" for="address" />
+                    <h:inputText id="address" value="#{studentController.selected.address}" title="#{bundle.EditStudentTitle_address}" />
+                </h:panelGrid>
+                <h:commandLink action="#{studentController.update}" value="#{bundle.EditStudentSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditStudentViewLink}"/>
+                <br />
+                <h:commandLink action="#{studentController.prepareList}" value="#{bundle.EditStudentShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditStudentIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

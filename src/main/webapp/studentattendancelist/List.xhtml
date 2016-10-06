@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListStudentattendancelistTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListStudentattendancelistEmpty}" rendered="#{studentattendancelistController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{studentattendancelistController.items.rowCount > 0}">
+                    <h:outputText value="#{studentattendancelistController.pagination.pageFirstItem + 1}..#{studentattendancelistController.pagination.pageLastItem + 1}/#{studentattendancelistController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{studentattendancelistController.previous}" value="#{bundle.Previous} #{studentattendancelistController.pagination.pageSize}" rendered="#{studentattendancelistController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{studentattendancelistController.next}" value="#{bundle.Next} #{studentattendancelistController.pagination.pageSize}" rendered="#{studentattendancelistController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{studentattendancelistController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListStudentattendancelistTitle_studentattendancelistPK_idAttendanceList}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.studentattendancelistPK.idAttendanceList}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListStudentattendancelistTitle_studentattendancelistPK_idStudent}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.studentattendancelistPK.idStudent}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{studentattendancelistController.prepareView}" value="#{bundle.ListStudentattendancelistViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{studentattendancelistController.prepareEdit}" value="#{bundle.ListStudentattendancelistEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{studentattendancelistController.destroy}" value="#{bundle.ListStudentattendancelistDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{studentattendancelistController.prepareCreate}" value="#{bundle.ListStudentattendancelistCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListStudentattendancelistIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

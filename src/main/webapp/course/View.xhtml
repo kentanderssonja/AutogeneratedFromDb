@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCourseTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCourseLabel_idCourse}"/>
+                    <h:outputText value="#{courseController.selected.idCourse}" title="#{bundle.ViewCourseTitle_idCourse}"/>
+                    <h:outputText value="#{bundle.ViewCourseLabel_courseName}"/>
+                    <h:outputText value="#{courseController.selected.courseName}" title="#{bundle.ViewCourseTitle_courseName}"/>
+                    <h:outputText value="#{bundle.ViewCourseLabel_courseCode}"/>
+                    <h:outputText value="#{courseController.selected.courseCode}" title="#{bundle.ViewCourseTitle_courseCode}"/>
+                    <h:outputText value="#{bundle.ViewCourseLabel_level}"/>
+                    <h:outputText value="#{courseController.selected.level}" title="#{bundle.ViewCourseTitle_level}"/>
+                    <h:outputText value="#{bundle.ViewCourseLabel_language}"/>
+                    <h:outputText value="#{courseController.selected.language}" title="#{bundle.ViewCourseTitle_language}"/>
+                    <h:outputText value="#{bundle.ViewCourseLabel_startDate}"/>
+                    <h:outputText value="#{courseController.selected.startDate}" title="#{bundle.ViewCourseTitle_startDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCourseLabel_endDate}"/>
+                    <h:outputText value="#{courseController.selected.endDate}" title="#{bundle.ViewCourseTitle_endDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCourseLabel_maxNumberOfStudents}"/>
+                    <h:outputText value="#{courseController.selected.maxNumberOfStudents}" title="#{bundle.ViewCourseTitle_maxNumberOfStudents}"/>
+                    <h:outputText value="#{bundle.ViewCourseLabel_idTeacher}"/>
+                    <h:outputText value="#{courseController.selected.idTeacher}" title="#{bundle.ViewCourseTitle_idTeacher}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{courseController.destroyAndView}" value="#{bundle.ViewCourseDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCourseEditLink}"/>
+                <br />
+                <h:commandLink action="#{courseController.prepareCreate}" value="#{bundle.ViewCourseCreateLink}" />
+                <br />
+                <h:commandLink action="#{courseController.prepareList}" value="#{bundle.ViewCourseShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCourseIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
